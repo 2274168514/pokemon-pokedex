@@ -63,7 +63,7 @@ export default function TypeFilter({ selectedTypes, onTypeChange }: TypeFilterPr
             onClick={() => setShowEffectivenessChart(true)}
             className="text-sm bg-blue-500 text-white px-3 py-1 rounded-full hover:bg-blue-600 transition-colors"
           >
-            {t('effectiveness.viewChart')}
+            🎯 {t('effectiveness.viewChart')}
           </button>
           {selectedTypes.length > 0 && (
             <button
