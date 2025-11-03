@@ -271,4 +271,4 @@ export default function TypeEffectivenessChart({ isOpen, onClose }: TypeEffectiv
       </div>
     </div>
   );
-}
+}// Updated at 2025年11月 4日  0:41:35
