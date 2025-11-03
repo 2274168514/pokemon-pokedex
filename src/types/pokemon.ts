@@ -1,5 +1,4 @@
 export interface Pokemon {
-  id: number;
   name: string;
   url: string;
 }
@@ -18,10 +17,10 @@ export interface PokemonDetails {
   sprites: {
     other: {
       'official-artwork': {
-        front_default: string;
+        front_default: string | null;
       };
     };
-    front_default: string;
+    front_default: string | null;
   };
   stats: {
     base_stat: number;
@@ -36,6 +35,12 @@ export interface PokemonDetails {
       url: string;
     };
     is_hidden: boolean;
+  }[];
+  moves: {
+    move: {
+      name: string;
+      url: string;
+    };
   }[];
   species: {
     name: string;
@@ -53,33 +58,11 @@ export interface PokemonListResponse {
 export interface PokemonSpecies {
   id: number;
   name: string;
-  names: {
-    name: string;
-    language: {
-      name: string;
-    };
-  }[];
-  flavor_text_entries: {
-    flavor_text: string;
-    language: {
-      name: string;
-    };
-    version: {
-      name: string;
-    };
-  }[];
-  genera: {
-    genus: string;
-    language: {
-      name: string;
-    };
-  }[];
-  color: {
-    name: string;
-  };
-  habitat: {
-    name: string;
-  } | null;
+  names: any[];
+  flavor_text_entries: any[];
+  genera: any[];
+  color: any;
+  habitat: any;
   evolution_chain: {
     url: string;
   };

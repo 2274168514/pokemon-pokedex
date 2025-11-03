@@ -112,21 +112,7 @@ export const pokemonAPI = {
     }
   },
 
-  // 获取宝可梦进化链
-  async getEvolutionChain(species: any) {
-    try {
-      if (species.evolution_chain?.url) {
-        const chainId = species.evolution_chain.url.split('/').slice(-2)[0];
-        const evolutionChain = await P.getEvolutionChainById(chainId);
-        return evolutionChain;
-      }
-      return null;
-    } catch (error) {
-      console.error('获取进化链失败:', error);
-      return null;
-    }
-  },
-};
+  };
 
 // 辅助函数：获取宝可梦的中文名称
 export function getPokemonChineseName(species: PokemonSpecies): string {

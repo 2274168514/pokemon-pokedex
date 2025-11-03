@@ -1,5 +1,4 @@
 import { PokemonDetails } from '@/types/pokemon';
-import { pokemonNames } from '@/data/pokemon-names';
 import { Language } from '@/contexts/LanguageContext';
 
 export function searchPokemon(
@@ -25,14 +24,7 @@ export function searchPokemon(
       return true;
     }
 
-    // 如果是中文模式，搜索中文名称
-    if (language === 'zh') {
-      const chineseName = pokemonNames[pokemon.name];
-      if (chineseName && chineseName.includes(normalizedQuery)) {
-        return true;
-      }
-    }
-
+    // 简单的搜索匹配，可以根据需要扩展
     return false;
   });
 }
