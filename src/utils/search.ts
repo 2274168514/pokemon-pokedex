@@ -1,5 +1,6 @@
 import { PokemonDetails } from '@/types/pokemon';
 import { Language } from '@/contexts/LanguageContext';
+import { getLocalizedPokemonName, getLocalizedTypeName, getLocalizedAbilityName } from './localization';
 
 export function searchPokemon(
   pokemonList: PokemonDetails[],
@@ -24,7 +25,28 @@ export function searchPokemon(
       return true;
     }
 
-    // 简单的搜索匹配，可以根据需要扩展
+    // 搜索本地化名称（中文名）
+    const localizedName = getLocalizedPokemonName(pokemon.name, language);
+    if (localizedName.toLowerCase().includes(normalizedQuery)) {
+      return true;
+    }
+
+    // 搜索类型（如果查询是一个类型名称）
+    if (pokemon.types.some(type =>
+      type.type.name.toLowerCase().includes(normalizedQuery) ||
+      getLocalizedTypeName(type.type.name, language).toLowerCase().includes(normalizedQuery)
+    )) {
+      return true;
+    }
+
+    // 搜索特性
+    if (pokemon.abilities.some(ability =>
+      ability.ability.name.toLowerCase().includes(normalizedQuery) ||
+      getLocalizedAbilityName(ability.ability.name, language).toLowerCase().includes(normalizedQuery)
+    )) {
+      return true;
+    }
+
     return false;
   });
 }
