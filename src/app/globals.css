@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .pokemon-type-badge {
+    @apply px-3 py-1 rounded-full text-white text-sm font-medium;
+  }
+
+  .pokemon-stat-bar {
+    @apply bg-gray-200 rounded-full h-2 overflow-hidden;
+  }
+
+  .pokemon-stat-fill {
+    @apply h-full rounded-full transition-all duration-500;
+  }
+}
