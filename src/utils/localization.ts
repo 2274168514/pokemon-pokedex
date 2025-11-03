@@ -1,4 +1,5 @@
 import { Language } from '@/contexts/LanguageContext';
+import { pokemonNames, abilityNames, moveNames } from '@/data/pokemon-names-zh';
 
 // 类型中文名称映射
 const typeNames: Record<string, string> = {
@@ -23,8 +24,14 @@ const typeNames: Record<string, string> = {
 };
 
 export function getLocalizedPokemonName(name: string, language: Language): string {
-  // 简单的名称格式化，可以根据需要扩展
   if (language === 'zh') {
+    // 首先尝试从映射表中查找中文名称
+    const chineseName = pokemonNames[name.toLowerCase()];
+    if (chineseName) {
+      return chineseName;
+    }
+
+    // 如果找不到映射，进行简单的名称格式化
     return name.split('-').map(part =>
       part.charAt(0).toUpperCase() + part.slice(1)
     ).join(' ');
@@ -41,6 +48,13 @@ export function getLocalizedTypeName(type: string, language: Language): string {
 
 export function getLocalizedAbilityName(ability: string, language: Language): string {
   if (language === 'zh') {
+    // 首先尝试从映射表中查找中文名称
+    const chineseName = abilityNames[ability.toLowerCase()];
+    if (chineseName) {
+      return chineseName;
+    }
+
+    // 如果找不到映射，进行简单的名称格式化
     return ability.replace('-', ' ');
   }
   return ability.replace('-', ' ');
@@ -48,6 +62,13 @@ export function getLocalizedAbilityName(ability: string, language: Language): st
 
 export function getLocalizedMoveName(move: string, language: Language): string {
   if (language === 'zh') {
+    // 首先尝试从映射表中查找中文名称
+    const chineseName = moveNames[move.toLowerCase()];
+    if (chineseName) {
+      return chineseName;
+    }
+
+    // 如果找不到映射，进行简单的名称格式化
     return move.replace('-', ' ');
   }
   return move.replace('-', ' ');
