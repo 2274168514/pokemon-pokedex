@@ -1,0 +1,10 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["hkg1", "sin1"],
+  "env": {
+    "NEXT_PUBLIC_API_URL": "https://pokeapi.co/api/v2"
+  }
+}
