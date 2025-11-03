@@ -105,6 +105,18 @@ const translations: Record<Language, Record<string, string>> = {
     'tabs.abilities': '特性',
     'tabs.moves': '技能',
 
+    // 属性克制关系
+    'effectiveness.viewChart': '查看克制关系',
+    'effectiveness.title': '属性克制关系',
+    'effectiveness.selectAttackingType': '选择攻击方属性',
+    'effectiveness.selectDefendingTypes': '选择防御方属性 (最多2个)',
+    'effectiveness.combinedEffectiveness': '综合克制效果',
+    'effectiveness.attackMatchups': '攻击克制关系',
+    'effectiveness.superEffective': '超有效 (2×)',
+    'effectiveness.normalEffective': '效果一般 (1×)',
+    'effectiveness.notVeryEffective': '效果不好 (0.5×)',
+    'effectiveness.noEffect': '无效果 (0×)',
+
     // 通用
     'common.close': '关闭',
     'common.loading': '加载中...',
@@ -200,6 +212,18 @@ const translations: Record<Language, Record<string, string>> = {
     'tabs.stats': 'Stats',
     'tabs.abilities': 'Abilities',
     'tabs.moves': 'Moves',
+
+    // Type Effectiveness
+    'effectiveness.viewChart': 'View Effectiveness',
+    'effectiveness.title': 'Type Effectiveness Chart',
+    'effectiveness.selectAttackingType': 'Select Attacking Type',
+    'effectiveness.selectDefendingTypes': 'Select Defending Types (max 2)',
+    'effectiveness.combinedEffectiveness': 'Combined Effectiveness',
+    'effectiveness.attackMatchups': 'Attack Matchups',
+    'effectiveness.superEffective': 'Super Effective (2×)',
+    'effectiveness.normalEffective': 'Normal Effective (1×)',
+    'effectiveness.notVeryEffective': 'Not Very Effective (0.5×)',
+    'effectiveness.noEffect': 'No Effect (0×)',
 
     // Common
     'common.close': 'Close',

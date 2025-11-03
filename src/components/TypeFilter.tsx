@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import TypeEffectivenessChart from './TypeEffectivenessChart';
 
 const types = [
   'normal', 'fire', 'water', 'electric', 'grass', 'ice',
@@ -37,6 +38,7 @@ interface TypeFilterProps {
 
 export default function TypeFilter({ selectedTypes, onTypeChange }: TypeFilterProps) {
   const { t } = useLanguage();
+  const [showEffectivenessChart, setShowEffectivenessChart] = useState(false);
 
   const handleTypeClick = (type: string) => {
     if (selectedTypes.includes(type)) {
@@ -56,14 +58,22 @@ export default function TypeFilter({ selectedTypes, onTypeChange }: TypeFilterPr
     <div>
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold text-gray-700">{t('filter.title')}</h3>
-        {selectedTypes.length > 0 && (
+        <div className="flex items-center gap-3">
           <button
-            onClick={handleClearAll}
-            className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
+            onClick={() => setShowEffectivenessChart(true)}
+            className="text-sm bg-blue-500 text-white px-3 py-1 rounded-full hover:bg-blue-600 transition-colors"
           >
-            {t('filter.clearAll')}
+            {t('effectiveness.viewChart')}
           </button>
-        )}
+          {selectedTypes.length > 0 && (
+            <button
+              onClick={handleClearAll}
+              className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
+            >
+              {t('filter.clearAll')}
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="flex flex-wrap gap-2">
@@ -100,6 +110,11 @@ export default function TypeFilter({ selectedTypes, onTypeChange }: TypeFilterPr
           </p>
         </div>
       )}
+
+      <TypeEffectivenessChart
+        isOpen={showEffectivenessChart}
+        onClose={() => setShowEffectivenessChart(false)}
+      />
     </div>
   );
 }
