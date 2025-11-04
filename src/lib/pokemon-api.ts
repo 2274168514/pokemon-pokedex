@@ -3,7 +3,7 @@ import { PokemonDetails, PokemonListResponse, PokemonSpecies } from '@/types/pok
 
 const P = new Pokedex({
   cacheLimit: 100 * 1000, // 100秒缓存
-  timeout: 10 * 1000, // 10秒超时
+  timeout: 30 * 1000, // 30秒超时
 });
 
 export const pokemonAPI = {
@@ -29,17 +29,32 @@ export const pokemonAPI = {
     }
   },
 
-  // 批量获取宝可梦详细信息
+  // 批量获取宝可梦详细信息（分批处理避免超时）
   async getMultiplePokemonDetails(namesOrIds: (string | number)[]): Promise<PokemonDetails[]> {
     try {
-      const promises = namesOrIds.map(nameOrId =>
-        P.getPokemonByName(nameOrId).catch(error => {
-          console.error(`获取宝可梦 ${nameOrId} 失败:`, error);
-          return null;
-        })
-      );
-      const results = await Promise.all(promises);
-      return results.filter(Boolean) as PokemonDetails[];
+      const results: PokemonDetails[] = [];
+      const batchSize = 20; // 每批处理20个
+
+      for (let i = 0; i < namesOrIds.length; i += batchSize) {
+        const batch = namesOrIds.slice(i, i + batchSize);
+        const promises = batch.map(nameOrId =>
+          P.getPokemonByName(nameOrId).catch(error => {
+            console.warn(`获取宝可梦 ${nameOrId} 失败，跳过:`, error.message);
+            return null;
+          })
+        );
+
+        const batchResults = await Promise.all(promises);
+        results.push(...batchResults.filter(Boolean) as PokemonDetails[]);
+
+        // 添加小延迟避免API限制
+        if (i + batchSize < namesOrIds.length) {
+          await new Promise(resolve => setTimeout(resolve, 100));
+        }
+      }
+
+      console.log(`成功获取 ${results.length}/${namesOrIds.length} 只宝可梦信息`);
+      return results;
     } catch (error) {
       console.error('批量获取宝可梦详细信息失败:', error);
       throw new Error('无法批量获取宝可梦详细信息');
