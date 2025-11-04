@@ -40,6 +40,9 @@ export default function TypeFilter({ selectedTypes, onTypeChange }: TypeFilterPr
   const { t } = useLanguage();
   const [showEffectivenessChart, setShowEffectivenessChart] = useState(false);
 
+  // DEBUG: 部署检查 - 2025-11-04 00:50
+  console.log('🎯 TypeFilter loaded with effectiveness chart feature');
+
   const handleTypeClick = (type: string) => {
     if (selectedTypes.includes(type)) {
       // 如果已选择该类型，则取消选择
@@ -61,9 +64,9 @@ export default function TypeFilter({ selectedTypes, onTypeChange }: TypeFilterPr
         <div className="flex items-center gap-3">
           <button
             onClick={() => setShowEffectivenessChart(true)}
-            className="text-sm bg-blue-500 text-white px-3 py-1 rounded-full hover:bg-blue-600 transition-colors"
+            className="text-sm bg-blue-500 text-white px-3 py-1 rounded-full hover:bg-blue-600 transition-colors animate-pulse"
           >
-            🎯 {t('effectiveness.viewChart')}
+            🎯 {t('effectiveness.viewChart')} v2.0
           </button>
           {selectedTypes.length > 0 && (
             <button
