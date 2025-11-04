@@ -6,5 +6,35 @@
   "regions": ["hkg1", "sin1"],
   "env": {
     "NEXT_PUBLIC_API_URL": "https://pokeapi.co/api/v2"
-  }
+  },
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_API_URL": "https://pokeapi.co/api/v2"
+    }
+  },
+  "functions": {
+    "app/api/**/*.ts": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(js|css|png|jpg|jpeg|gif|ico|svg))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
 }
