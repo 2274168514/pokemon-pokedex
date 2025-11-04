@@ -60,7 +60,7 @@ export default function TypeFilter({ selectedTypes, onTypeChange }: TypeFilterPr
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-700">{t('filter.title')}</h3>
+        <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300">{t('filter.title')}</h3>
         <div className="flex items-center gap-3">
           <button
             onClick={() => setShowEffectivenessChart(true)}
@@ -71,7 +71,7 @@ export default function TypeFilter({ selectedTypes, onTypeChange }: TypeFilterPr
           {selectedTypes.length > 0 && (
             <button
               onClick={handleClearAll}
-              className="text-sm text-gray-500 hover:text-gray-700 transition-colors"
+              className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors"
             >
               {t('filter.clearAll')}
             </button>
@@ -104,10 +104,10 @@ export default function TypeFilter({ selectedTypes, onTypeChange }: TypeFilterPr
       </div>
 
       {selectedTypes.length > 0 && (
-        <div className="mt-4 p-3 bg-gray-50 rounded-lg border border-gray-200">
-          <p className="text-sm text-gray-700">
+        <div className="mt-4 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 transition-colors duration-200">
+          <p className="text-sm text-gray-700 dark:text-gray-300">
             {t('filter.selected', { count: 1 })}
-            <span className="ml-2 font-medium">
+            <span className="ml-2 font-medium text-gray-900 dark:text-white">
               {t(`types.${selectedTypes[0]}`)}
             </span>
           </p>

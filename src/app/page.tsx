@@ -12,6 +12,7 @@ import SearchBar from '@/components/SearchBar';
 import TypeFilter from '@/components/TypeFilter';
 import LanguageSelector from '@/components/LanguageSelector';
 import GenerationSelector from '@/components/GenerationSelector';
+import ThemeToggle from '@/components/ThemeToggle';
 
 export default function HomePage() {
   const { t, language } = useLanguage();
@@ -141,20 +142,21 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
       {/* 头部 */}
-      <header className="bg-white shadow-sm border-b border-gray-200">
+      <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 transition-colors duration-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex justify-between items-center">
             <div className="text-center flex-1">
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2 transition-colors duration-200">
                 {t('app.title')}
               </h1>
-              <p className="text-gray-600 text-lg">
+              <p className="text-gray-600 dark:text-gray-300 text-lg transition-colors duration-200">
                 {t('app.subtitle')}
               </p>
             </div>
-            <div className="ml-4">
+            <div className="flex items-center gap-3">
+              <ThemeToggle />
               <LanguageSelector />
             </div>
           </div>
@@ -173,7 +175,7 @@ export default function HomePage() {
             {/* 世代选择器 */}
             <div className="md:w-64">
               <div className="mb-2">
-                <h3 className="text-lg font-semibold text-gray-800">{t('filter.generation')}</h3>
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-white">{t('filter.generation')}</h3>
               </div>
               <GenerationSelector
                 selectedGeneration={selectedGeneration}
@@ -195,7 +197,7 @@ export default function HomePage() {
         {(loading || error || searchQuery || selectedTypes.length > 0 || selectedGeneration !== 0) && (
           <div className="mb-6">
             {loading && (
-              <div className="text-center text-gray-600">
+              <div className="text-center text-gray-600 dark:text-gray-300">
                 <div className="inline-flex items-center">
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-blue-500 mr-3"></div>
                   {t('status.loading')}
@@ -210,7 +212,7 @@ export default function HomePage() {
             )}
 
             {!loading && !error && (searchQuery || selectedTypes.length > 0 || selectedGeneration !== 0) && (
-              <div className="text-center text-gray-600">
+              <div className="text-center text-gray-600 dark:text-gray-300">
                 {t('status.found', { count: filteredPokemonList.length })}
                 {searchQuery && (
                   <span>
@@ -251,7 +253,7 @@ export default function HomePage() {
                 <button
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-700 dark:text-gray-200"
                 >
                   {t('pagination.previous')}
                 </button>
@@ -276,7 +278,7 @@ export default function HomePage() {
                         className={`px-3 py-2 rounded-lg transition-colors ${
                           currentPage === pageNumber
                             ? 'bg-blue-500 text-white'
-                            : 'bg-white border border-gray-300 hover:bg-gray-50'
+                            : 'bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200'
                         }`}
                       >
                         {pageNumber}
@@ -288,7 +290,7 @@ export default function HomePage() {
                 <button
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors text-gray-700 dark:text-gray-200"
                 >
                   {t('pagination.next')}
                 </button>
@@ -297,11 +299,11 @@ export default function HomePage() {
 
             {filteredPokemonList.length === 0 && !loading && !error && (
               <div className="text-center py-12">
-                <div className="text-gray-400 text-6xl mb-4">{t('language.switch')}</div>
-                <h3 className="text-xl font-semibold text-gray-600 mb-2">
+                <div className="text-gray-400 dark:text-gray-500 text-6xl mb-4">{t('language.switch')}</div>
+                <h3 className="text-xl font-semibold text-gray-600 dark:text-gray-300 mb-2">
                   {t('status.noResults')}
                 </h3>
-                <p className="text-gray-500">
+                <p className="text-gray-500 dark:text-gray-400">
                   {t('status.noResultsHint')}
                 </p>
               </div>
